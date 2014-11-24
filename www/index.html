@@ -1,0 +1,1656 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9" />
+<meta http-equiv="Content-Type" content="text/html; charset=x-mac-turkish" /> 
+<title>Esovtaj</title>
+<link rel="stylesheet" href="css/idangerous.swiper.css">
+<link rel="stylesheet" href="css/normalize.css">
+<link rel="stylesheet" href="css/movies-app.css">
+<link rel="stylesheet" href="http://demos.jquerymobile.com/1.4.0/css/themes/default/jquery.mobile-1.4.0.min.css">
+<script src="js/jquery.min.js"></script>
+<script src="http://demos.jquerymobile.com/1.4.0/js/jquery.mobile-1.4.0.min.js"></script>
+<script src="js/tekliflistesi.js"></script>
+<script src="js/teklifDetay.js"></script>
+<script src="js/enazteklif.js"></script>
+<script src="js/enazteklifDetay.js"></script>
+<script src="js/mesajlarim.js"></script>
+<script src="js/servis.js"></script>
+<script src="js/gidenmesajlarim.js"></script>
+<script src="js/aramadetay.js"></script>
+<link rel="stylesheet" href="css/idangerous.swiper.css">
+<style>
+.picture{
+  height: 400px;
+  width: 600px;
+}
+.movie-pic{
+  height: auto;
+  width: 100%;
+}
+.swiper-container {
+  height: 400px;
+  width: 600px;
+  position: center;
+ margin-left: auto;
+    margin-right: auto;
+}
+
+.content-slide {
+  padding: 200px;
+  color: #fff;
+}
+.pagination {
+  position: absolute;
+  left: 0;
+  text-align: center;
+  bottom:5px;
+  width: 100%;
+}
+.swiper-pagination-switch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+  background: #999;
+  box-shadow: 0px 1px 2px #555 inset;
+  margin: 0 3px;
+  cursor: pointer;
+}
+.swiper-active-switch {
+  background: #fff;
+}
+</style>
+<script>
+setTimeout(function(){ window.location = "#giris";}, 1*5*1000);
+</script>
+<script>
+
+$(document).delegate('#galleryPage', 'pageshow', function() {
+	var id = getUrlVars()["id"];
+	$.getJSON('http://195.155.102.12/esovtajlocal9/services/getarac.php?id='+id, displayGallery);
+    });
+
+	function displayGallery(data) {
+	var employee = data.item;
+	$("#1").attr("src", 'http://195.155.102.12/esovtajlocal9/www/pics/'+employee.idaraclar+'/' + employee.image1);
+	$("#2").attr("src", 'http://195.155.102.12/esovtajlocal9/www/pics/'+employee.idaraclar+'/' + employee.image2);
+	$("#3").attr("src", 'http://195.155.102.12/esovtajlocal9/www/pics/'+employee.idaraclar+'/' + employee.image3);
+	$("#4").attr("src", 'http://195.155.102.12/esovtajlocal9/www/pics/'+employee.idaraclar+'/' + employee.image1);
+	$("#5").attr("src", 'http://195.155.102.12/esovtajlocal9/www/pics/'+employee.idaraclar+'/' + employee.image2);
+	$("#6").attr("src", 'http://195.155.102.12/esovtajlocal9/www/pics/'+employee.idaraclar+'/' + employee.image3);
+	$("#7").attr("src", 'http://195.155.102.12/esovtajlocal9/www/pics/'+employee.idaraclar+'/' + employee.image1);
+	$("#8").attr("src", 'http://195.155.102.12/esovtajlocal9/www/pics/'+employee.idaraclar+'/' + employee.image2);
+	$("#9").attr("src", 'http://195.155.102.12/esovtajlocal9/www/pics/'+employee.idaraclar+'/' + employee.image2);
+	$("#10").attr("src", 'http://195.155.102.12/esovtajlocal9/www/pics/'+employee.idaraclar+'/' + employee.image3);
+	$("#11").attr("src", 'http://195.155.102.12/esovtajlocal9/www/pics/'+employee.idaraclar+'/' + employee.image1);
+	$("#img1").attr("src", 'http://195.155.102.12/esovtajlocal9/www/pics/'+employee.idaraclar+'/' + employee.image1);
+	$("#img2").attr("src", 'http://195.155.102.12/esovtajlocal9/www/pics/'+employee.idaraclar+'/' + employee.image2);
+	$("#img3").attr("src", 'http://195.155.102.12/esovtajlocal9/www/pics/'+employee.idaraclar+'/' + employee.image3);
+	$("#img4").attr("src", 'http://195.155.102.12/esovtajlocal9/www/pics/'+employee.idaraclar+'/' + employee.image1);
+	$("#img5").attr("src", 'http://195.155.102.12/esovtajlocal9/www/pics/'+employee.idaraclar+'/' + employee.image2);
+	$("#img6").attr("src", 'http://195.155.102.12/esovtajlocal9/www/pics/'+employee.idaraclar+'/' + employee.image3);
+	$("#img7").attr("src", 'http://195.155.102.12/esovtajlocal9/www/pics/'+employee.idaraclar+'/' + employee.image1);
+	$("#img8").attr("src", 'http://195.155.102.12/esovtajlocal9/www/pics/'+employee.idaraclar+'/' + employee.image2);
+	$("#img9").attr("src", 'http://195.155.102.12/esovtajlocal9/www/pics/'+employee.idaraclar+'/' + employee.image2);
+	$("#img10").attr("src", 'http://195.155.102.12/esovtajlocal9/www/pics/'+employee.idaraclar+'/' + employee.image3);
+	$("#img11").attr("src", 'http://195.155.102.12/esovtajlocal9/www/pics/'+employee.idaraclar+'/' + employee.image1);
+
+	}
+
+	function getUrlVars() {
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+	}
+</script>
+<script>
+        function onSuccess(data, status)
+        {
+            data = $.trim(data);
+            $("#notification").text(data);
+        }
+  
+        function onError(data, status)
+        {
+            // handle an error
+			 data = $.trim(data);
+        $("#notification").text(data);
+		alert(data);
+        }        
+  
+        
+            function gonder(){
+			if(document.getElementById("txtUser").value=='muzeyyen')
+			{
+				document.getElementById("user").value=1;
+			}
+			if(document.getElementById("txtUser").value=='esovtaj')
+			{
+				document.getElementById("user").value=2;
+			}
+                var formData = $("#callAjaxForm").serialize();
+  
+                $.ajax({
+                    type: "POST",
+                    url: "http://195.155.102.12/esovtajlocal9/services/teklif.php",
+                    cache: false,
+                    data: formData,
+                    success: onSuccess,
+                    error: onError
+                });
+       
+                return false;
+            }
+       
+</script>
+<script>
+        function onSuccess(data, status)
+        {
+            data = $.trim(data);
+            $("#notificationDosya").text(data);
+        }
+  
+        function onError(data, status)
+        {
+            // handle an error
+        }        
+  
+        $(document).ready(function() {
+            $("#submitDosya").click(function(){
+			if(document.getElementById("txtUser").value=='muzeyyen')
+			{
+				document.getElementById("userDosya").value=1;
+			}
+			if(document.getElementById("txtUser").value=='esovtaj')
+			{
+				document.getElementById("userDosya").value=2;
+			}
+                var formData = $("#callAjaxFormDosya").serialize();
+  
+                $.ajax({
+                    type: "POST",
+                    url: "http://195.155.102.12/esovtajlocal9/services/teklif.php",
+                    cache: false,
+                    data: formData,
+                    success: onSuccess,
+                    error: onError
+                });
+               document.getElementById("teklifDosya").value='';
+                return false;
+            });
+        });
+</script>
+<script>
+        function onSuccess(data, status)
+        {
+            data = $.trim(data);
+            $("#notification").text(data);
+        }
+  
+        function onError(data, status)
+        {
+            // handle an error
+        }        
+  
+        $(document).ready(function() {
+            $("#mesajbtn").click(function(){
+                var formData = $("#mesajgonder").serialize();
+  
+                $.ajax({
+                    type: "POST",
+                    url: "http://195.155.102.12/esovtajlocal9/services/mesaj.php",
+                    cache: false,
+                    data: formData,
+                    success: onSuccess,
+                    error: onError
+                });
+               document.getElementById("mesajmetni").value='';
+                return false;
+            });
+        });
+</script>
+<script>
+$(document).delegate('#detailsPage', 'pageshow', function() {
+	var id = getUrlVars()["id"];
+	$.getJSON('http://195.155.102.12/esovtajlocal9/services/getarac.php?id='+id, displayEmployee);
+    });
+	var image1=new Image();
+	var image2=new Image();
+	var image3=new Image();
+	var step=1;
+	function displayEmployee(data) {
+
+	$('#actionList li').remove();
+	$('#employeePic src').remove();
+
+	var employee = data.item;
+	console.log(employee);
+	$('#employeePic').attr('src','pics/' + employee.image);
+	image1.src='http://195.155.102.12/esovtajlocal9/www/pics/'+employee.idaraclar+'/' + employee.image1;
+	image2.src='http://195.155.102.12/esovtajlocal9/www/pics/'+employee.idaraclar+'/' + employee.image2;
+	image3.src='http://195.155.102.12/esovtajlocal9/www/pics/'+employee.idaraclar+'/' + employee.image3;
+	var step=1;
+	function slideit()
+	{
+    //if browser does not support the image object, exit.
+		if (!document.images)
+		return
+		document.images.slide.src=eval("image"+step+".src")
+		if (step<3)
+			step++
+		else
+			step=1
+			//call function "slideit()" every 2.5 seconds
+			setTimeout("slideit()",2500)
+	}
+	window.onload = slideit();
+	$('#imagelink').attr('href','#galleryPage?id='+employee.idaraclar);
+	$('#imagelink1').attr('href','#galleryPage?id='+employee.idaraclar);
+	$('#imagelink2').attr('href','#galleryPage?id='+employee.idaraclar);
+	$('#employeePic').attr('src','pics/'+employee.idaraclar+'/' + employee.image1);
+	$('#carPic1').attr('src', 'http://195.155.102.12/esovtajlocal9/www/pics/'+employee.idaraclar+'/' + employee.image1);
+	$('#carPic2').attr('src', 'http://195.155.102.12/esovtajlocal9/www/pics/'+employee.idaraclar+'/' + employee.image2);
+	$('#carPic3').attr('src', 'http://195.155.102.12/esovtajlocal9/www/pics/'+employee.idaraclar+'/' + employee.image3);	
+		
+    $('#aracId').attr('value', ''+employee.idaraclar+'');
+	$('#aracId1').attr('value',''+employee.idaraclar+'');
+		
+	$('#actionList').append('<li><p>' + employee.marka + '<a href="#gelen?id='+document.getElementById("user").value+'" rel="external"><img src="pics/mesajbtn.jpg" align="right" id="mesajbtn"/></a>' +
+				'<p style="color:orange;">' + employee.Belge_Turu + '</p></li>');
+			
+	$('#actionList').append('<li><form id="callAjaxForm">'+		
+	 '<div data-role="fieldcontain">' +
+     '<input type="hidden" name="aracId" id="aracId" height="0" width="0"  data-mini="true" value=""/>' +
+	 '<input type="hidden" name="user" id="user" height="0" width="0" data-mini="true" data-corners="false" value=""/>' +
+     '<label for="teklif"><b>Teklif Fiyatı </b></label><input type="text" name="teklif" data-mini="true" id="teklif" value=""/>' +
+     '<h3 id="notification"></h3>' +
+     '<center><button data-theme="c" onclick="gonder();" data-mini="true" data-inline="true" type="submit">Gönder</button></center>' +
+     '</div>' +
+	 '</form></li>');
+	 
+	 
+	$('#actionList').append('<li><hr><b>Araç Bilgileri</b><hr>'+
+	'<b>Bulunduğu Yer&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Plaka No</b>' +
+	'<p>' + employee.yer + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+employee.Plaka_No+'</p>'+
+	'<b>Dosya No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Takip No</b>' +
+	'<p>' + employee.dosyaNo+ '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+employee.takipNo+'</p>'+
+	'<hr><b>İhale Bilgileri</b><hr>'+
+	'<b>İhale No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;İhale Bitiş Zamanı</b>' +
+	'<p>' + employee.ihaleNo + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+employee.ihaleBitisi+'</p>'+
+	'<b>İhale Sorumlusu&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Piyasa Bedeli</b>' +
+	'<p>' + employee.ihaleSorumlusu + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+employee.piyasaBedeli+'</p>'+
+	'<hr><b>Hasar Bilgileri</b><hr>'+
+	'<p>'+ employee.sasiNo +' Sasino lu arac '+ employee.kazaSayisi +' adet kazaya karışmıştır.</p></li>');
+	if (employee.kaza1) 
+	{
+		$('#actionList').append('<li><p>' + employee.kaza1 + '</p></li>');
+	}
+	if (employee.kaza2) 
+	{
+		$('#actionList').append('<li><p>' + employee.kaza2 + '</p></li>');
+	}
+	if (employee.kaza3) 
+	{
+		$('#actionList').append('<li><p>' + employee.kaza3 + '</p></li>');
+	}
+
+	$('#actionList').append('<li>' +
+					'<h4>İhale Sorumlusu</h4><hr>' +
+					'<p>' + employee.kisiAdi + '</p>' +
+					'<p>' + employee.telefon + '</p>' +
+					'<p>' + employee.adres + '</p>' +
+					'</a></li>');	
+					
+	$('#actionList').append('<li><div data-role="content"><p style="color:red;"> GEÇMİŞ DÖNEME AİT TRAMER SORGUSUDUR. SON HASARA AİT TRAMER KAYITLARI DEĞİŞİKLİK GÖSTEREBİLECEĞİNDEN LÜTFEN TRAMER SORGUSU YAPARAK TEKLİF VERİNİZ.</p></li></div>');
+
+	$('#actionList').listview('refresh');
+	
+
+	}
+	function slideit(){
+	//if browser does not support the image object, exit.
+	if (!document.images)
+	return
+	document.images.slide.src=eval("image"+step+".src")
+	if (step<3)
+		step++
+	else
+		step=1
+		//call function "slideit()" every 2.5 seconds
+		setTimeout("slideit()",2500)
+	}
+	function getUrlVars() {
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+	}
+</script>
+ 
+<script src="js/idangerous.swiper-2.0.min.js"></script>
+<script src="js/movies-app.js"></script>
+<style type="text/css">
+    #footerdetay{
+	 width:100%; 
+     height:auto;
+	}
+	    #playdiv{
+	 width:100%; 
+     height:auto;
+	}
+    #galeriscreen{
+	 width:100%; 
+     height:auto;
+	}
+	.ui-header {
+    background: #FFFFFF !important;
+    }
+	#employeePic {
+		 width:306px; 
+         height:230px;
+	}
+
+	.butonlar
+	{
+	    width:90%; 
+        height:auto;	
+	}
+ 
+	#footerbar{
+	  width:100%; 
+      height:auto;
+	}
+	
+	#solmenuicon {    
+	background: url("pics/black.jpg") no-repeat 50% 50% !important;   
+	-moz-border-radius:0px;
+	-webkit-border-radius:0px;
+	border-radius:0px;
+	width:60px;
+	height:60px;
+	margin-top:-12px;/*Adjust this value to position the icon*/
+	}
+		
+	.ui-field-contain {
+    width: auto;
+	align: center;
+     }
+    #employeeListPage * {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+	}
+	/* Arrow only buttons in the header. */
+	#employeeListPage .ui-header .ui-btn {
+    background: none;
+    border: none;
+    top: 9px;
+	}
+	#employeeListPage .ui-header .ui-btn-inner {
+    border: none;
+	}
+	#giris .ui-input-text{
+    width: 175px !important;
+	}
+	.girissayfa {
+    background-image: url('pics/user.jpg') !important;
+	}
+	/* Content styling. */
+	dl { font-family: "Times New Roman", Times, serif; padding: 1em; }
+	dt { font-size: 2em; font-weight: bold; }
+	dt span { font-size: .5em; color: #777; margin-left: .5em; }
+	dd { font-size: 1.25em; margin: 1em 0 0; padding-bottom: 1em; border-bottom: 1px solid #eee; }
+
+	.back-btn { float: right; margin: 0 2em 1em 0; }
+   .ui-page 
+   {
+    background: transparent url(pics/background.jpg);
+    background-size:100% 100%;
+    background-repeat:repeat-n;
+   }
+
+   .big { height: 60px;}
+   .big .ui-btn-inner { padding-top:25px; }
+   .align-right 
+    { 
+    float:right; 
+    margin-right: 5px;
+    }
+    .main {
+    background: transparent url(pics/background.jpg);
+    background-size:100% 100%;
+    background-repeat:repeat-n;
+   }
+    #playdiv {text-align:center;}
+    #playdiv div {display:inline-block;}
+	#playdiv{
+	 width:100%;
+	}
+   .box {background:#DF0101;color:white;padding:10px;}
+    li.mainList { background-color: aqua; }
+	
+    @media only screen and (min-width:960px){
+        /* styles for browsers larger than 960px; */
+		
+		
+    }
+    @media only screen and (min-width:1440px){
+        /* styles for browsers larger than 1440px; */
+    }
+    @media only screen and (min-width:2000px){
+        /* for sumo sized (mac) screens */
+    }
+    @media only screen and (max-device-width:480px){
+       /* styles for mobile browsers smaller than 480px; (iPhone) */
+       
+    }
+    @media only screen and (device-width:768px){
+       /* default iPad screens */
+	   
+	#footer1 { 
+             width:80px; 
+             height:58px; 
+	}
+	#footer2 { 
+             width:880px; 
+             height:58px;
+	}
+	#footer3 { 
+             width:80px; 
+             height:58px;
+	}
+	#footer4 { 
+             width:80px; 
+             height:58px;
+	}
+	#footer5 { 
+             width:80px; 
+             height:58px;
+	}
+
+    }
+	@media screen and (max-width: 720px) {
+       /* default iPad screens */
+	   .picture {
+		 width:500px; 
+         height:430px;
+		
+	}
+	.swiper-container {
+  height: 430px;
+  width: 500px;
+  position: center;
+ margin-left: auto;
+    margin-right: auto;
+}
+	#footer1 { 
+             width:80px; 
+             height:58px; 
+	}
+	#footer2 { 
+             width:80px; 
+             height:58px; 
+	}
+	#footer3 { 
+             width:80px; 
+             height:58px; 
+	}
+	#footer4 { 
+            width:80px; 
+            height:58px; 
+	}
+	#footer5 { 
+             width:80px; 
+             height:58px; 
+	}
+
+    }
+    /* different techniques for iPad screening */
+    @media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) {
+      /* For portrait layouts only */
+	  #footer1 { 
+             max-width:80px; 
+             max-height:58px; 
+	}
+	#footer2 { 
+             max-width:80px; 
+             max-height:58px;
+	}
+	#footer3 { 
+             max-width:80px; 
+             max-height:58px;
+	}
+	#footer4 { 
+             max-width:80px; 
+             max-height:58px;
+	}
+	#footer5 { 
+             max-width:80px; 
+             max-height:58px;
+	}
+	.staricon {
+			 width:35px; 
+             height:35px; 
+	}
+
+    }
+
+    @media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape) {
+      /* For landscape layouts only */
+    }
+    @media screen and (max-width: 480px) {
+	.picture {
+		 width:300px; 
+         height:230px;
+		
+	}
+	.swiper-container {
+	height: 230px;
+	width: 300px;
+	position: center;
+	margin-left: auto;
+    margin-right: auto;
+	}
+	#employeePic {
+		 width:255px; 
+         height:191px;
+	}
+	#logoimage { 
+             max-width:210px; 
+             max-height:60px; 
+	}
+	#slayt { 
+             max-width:300px; 
+             max-height:150px; 
+	}
+	#footer1 { 
+             width:75px; 
+             height:42px;
+	}
+	#footer2 { 
+             width:75px; 
+             height:42px; 
+	}
+	#footer3 { 
+             width:75px; 
+             height:42px; 
+	}
+	#footer4 { 
+             width:75px; 
+             height:42px; 
+	}
+	#footer5 { 
+             width:75px; 
+             height:42px;  
+	}
+	#backimage { 
+             width:45px; 
+             height:45px;  
+	}
+	#backimage1 { 
+             width:45px; 
+             height:45px;  
+	}
+	#backimage2 { 
+             width:45px; 
+             height:45px;  
+	}
+	#backimage3 { 
+             width:45px; 
+             height:45px;  
+	}
+	#backimage4 { 
+             width:45px; 
+             height:45px;  
+	}
+	#backimage5 { 
+             width:45px; 
+             height:45px;  
+	}
+	#backimage6 { 
+             width:45px; 
+             height:45px;  
+	}
+	#backimage7 { 
+             width:45px; 
+             height:45px;  
+	}
+	#backimage8 { 
+             width:45px; 
+             height:45px;  
+	}
+	#backimage9 { 
+             width:45px; 
+             height:45px;  
+	}
+	#backimage10 { 
+             width:45px; 
+             height:45px;  
+	}
+	#backimage11 { 
+             width:45px; 
+             height:45px;  
+	}
+	#backimage12 { 
+             width:45px; 
+             height:45px;  
+	}
+	#backimage13 { 
+             width:45px; 
+             height:45px;  
+	}
+
+
+	#solmenuicon {    
+	background: url("pics/black.jpg") no-repeat 50% 50% !important;   
+	-moz-border-radius:0px;
+	-webkit-border-radius:0px;
+	border-radius:0px;
+	width:45px;
+	height:45px;
+	margin-top:-12px;/*Adjust this value to position the icon*/
+	}
+	.staricon {
+			 width:35px; 
+             height:35px; 
+	}
+
+	}
+	
+	@media screen and (max-width: 393px) {
+	
+	#employeePic {
+		 width:204px; 
+         height:153px;
+	}
+	
+	#logoimage { 
+             max-width:175px; 
+             max-height:50px; 
+	}
+	
+	#slayt { 
+             max-width:300px; 
+             max-height:150px; 
+	}
+	
+	#footer1 { 
+             width:60px; 
+             height:42px; 
+	}
+	#footer2 { 
+             width:60px; 
+             height:42px; 
+	}
+	#footer3 { 
+             width:60px; 
+             height:42px; 
+	}
+	#footer4 { 
+             width:60px; 
+             height:42px; 
+	}
+	#footer5 { 
+             width:60px; 
+             height:42px;  
+	}
+	#backimage { 
+             max-width:35px; 
+             max-height:35px; 
+	}
+	#backimage1 { 
+             width:35px; 
+             height:35px;  
+	}
+	#backimage2 { 
+             max-width:35px; 
+             max-height:35px; 
+	}
+	#backimage3 { 
+             width:35px; 
+             height:35px;  
+	}
+	#backimage4 { 
+             max-width:35px; 
+             max-height:35px; 
+	}
+	#backimage5 { 
+             width:35px; 
+             height:35px;  
+	}
+	#backimage6 { 
+             max-width:35px; 
+             max-height:35px; 
+	}
+	#backimage7 { 
+             width:35px; 
+             height:35px;  
+	}
+	#backimage8 { 
+             max-width:35px; 
+             max-height:35px; 
+	}
+	#backimage9 { 
+             width:35px; 
+             height:35px;  
+	}
+	#backimage10 { 
+             max-width:35px; 
+             max-height:35px; 
+	}
+	#backimage11 { 
+             max-width:35px; 
+             max-height:35px; 
+	}
+	#backimage12 { 
+             width:45px; 
+             height:45px;  
+	}
+	#backimage13 { 
+             width:45px; 
+             height:45px;  
+	}
+	#solmenuicon {    
+	background: url("pics/black.jpg") no-repeat 50% 50% !important;   
+	-moz-border-radius:0px;
+	-webkit-border-radius:0px;
+	border-radius:0px;
+	width:35px;
+	height:35px;
+	margin-top:-12px;/*Adjust this value to position the icon*/
+	}
+	.staricon {
+			 width:30px; 
+             height:30px; 
+	}
+
+	}
+	 @media screen and (max-width: 576px) {
+	
+	#employeePic {
+		 width:255px; 
+         height:191px;
+	}
+	
+	#logoimage { 
+             width:252px; 
+             height:72px; 
+	}
+	
+	#slayt { 
+             max-width:300px; 
+             max-height:150px; 
+	}
+	
+	#backimage { 
+             width:50px; 
+             height:50px;  
+	}
+	#backimage1 { 
+             width:50px; 
+             height:50px;  
+	}
+	#backimage2 { 
+             width:50px; 
+             height:50px;  
+	}
+	#backimage3 { 
+             width:50px; 
+             height:50px;  
+	}
+	#backimage4 { 
+             width:50px; 
+             height:50px;  
+	}
+	#backimage5 { 
+             width:50px; 
+             height:50px;  
+	}
+	#backimage6 { 
+             width:50px; 
+             height:50px;  
+	}
+	#backimage7 { 
+             width:50px; 
+             height:50px;  
+	}
+	#backimage8 { 
+             width:50px; 
+             height:50px;  
+	}
+	#backimage9 { 
+             width:50px; 
+             height:50px;  
+	}
+	#backimage10 { 
+             width:50px; 
+             height:50px;  
+	}
+	#backimage11 { 
+             width:50px; 
+             height:50px;  
+	}
+	#backimage12 { 
+             width:45px; 
+             height:45px;  
+	}
+	#backimage13 { 
+             width:45px; 
+             height:45px;  
+	}
+	#solmenuicon {    
+	background: url("pics/black.jpg") no-repeat 50% 50% !important;   
+	-moz-border-radius:0px;
+	-webkit-border-radius:0px;
+	border-radius:0px;
+	width:35px;
+	height:35px;
+	margin-top:-12px;/*Adjust this value to position the icon*/
+	}
+	.staricon {
+			 width:30px; 
+             height:30px; 
+	}
+	
+	}
+	
+    </style>
+<script>
+$( document ).ready(function() {
+
+$('#dosyasorgula').click(function(){
+  window.open("#dosyaaara","_self");
+});
+
+});
+</script>
+<script type="text/javascript">
+		$(document).ready(function(){
+			$("#backimage1").click(function(){
+				window.open("#anasayfa","_self");
+				//or you could pass parameters in the URL
+				//$.mobile.changePage("page2.html?arg1=Ram");
+			});
+		});
+		</script>
+<script>
+$( document ).ready(function() {
+
+$('#girissayfa').click(function(){
+if(( document.getElementById('txtUser').value=="muzeyyen" && document.getElementById('txtPass').value=="123") || ( document.getElementById('txtUser').value=="esovtaj" && document.getElementById('txtPass').value=="123"))
+   {
+			if(document.getElementById("txtUser").value=='muzeyyen')
+			{
+				document.getElementById("user").value=1;
+				document.getElementById("user1").value=1;
+			}
+			if(document.getElementById("txtUser").value=='esovtaj')
+			{
+				document.getElementById("user").value=2;
+				document.getElementById("user1").value=2;
+			}
+			document.getElementById("gidenmesaj").href="#giden?id="+document.getElementById("user").value;
+			document.getElementById("gelenmesaj").href="#gelen?id="+document.getElementById("user").value;
+			document.getElementById("gidenmesaj1").href="#giden?id="+document.getElementById("user").value;
+			document.getElementById("gelenmesaj1").href="#gelen?id="+document.getElementById("user").value;
+			 window.open("#anasayfa","_self");
+   }
+   else
+	{
+		alert("Kullanıcı Adı ya da Parola Yanlış")/*displays error message*/
+	}
+});
+$('#araclarbtn').click(function(){
+	window.open("#employeeListPage","_self");
+});
+
+$('#teklifbtn').click(function(){
+	window.open("#teklifSayfasi?id="+document.getElementById("user").value,"_self");
+});
+
+$('#dosyasorgula').click(function(){
+	window.open("#dosyaaara","_self");
+});
+
+$('#arsivbtn').click(function(){
+	window.open("#arsivanasayfa","_self");
+});
+
+$('#firsatbtn').click(function(){
+  window.open("#enazteklifSayfasi","_self");
+});
+
+});
+</script>
+<script>
+$('#gelenmesaj').click(function(){
+  window.open("#gelen?id="+document.getElementById("user").value,"_self");
+});
+
+$('#gidenmesaj').click(function(){
+  window.open("#giden?id="+document.getElementById("user").value,"_self");
+});
+</script>
+<script>
+$('#detaylar').click(function(){
+  window.open("#detailsPage?id="+document.getElementById("aracId").value,"_self");
+});
+
+$('#servis').click(function(){
+  window.open("#pagetwo?id="+document.getElementById("aracId").value,"_self");
+});
+$('#detaylar1').click(function(){
+  window.open("#detailsPage?id="+document.getElementById("aracId").value,"_self");
+});
+
+$('#servis1').click(function(){
+  window.open("#pagetwo?id="+document.getElementById("aracId").value,"_self");
+});
+</script>
+<script type="text/javascript">
+		$(document).ready(function(){
+			$("#backimage").click(function(){
+				window.open("#employeeListPage","_self");
+				//or you could pass parameters in the URL
+				//$.mobile.changePage("page2.html?arg1=Ram");
+			});
+		});
+</script>
+<style>
+	.ui-icon-custom:after {
+	background-image: url("pics/icon-star.jpg");
+	background-position: 0px 1px;
+	background-size: 100%; }
+</style>
+
+</head>
+
+<body>
+
+<div align="center" data-role="page" id="giris" style="background: url(pics/anasayfa2.jpg);background-size: cover;">
+	    <br><br><br> <br><br><br> <br><br><br>
+        <b>Kullanıcı Adı:</b>
+        <input id="txtUser" type="text" data-theme="a" data-mini="true"></input>
+        <b>Parola:</b>
+        <input id="txtPass" type="password" data-theme="a" data-mini="true" /></center>
+        <button id="girissayfa" data-inline="true" />Giriş</button></center>   		
+</div><!-- /page -->   
+
+<div id="anasayfa" data-role="page">
+		<div><img src="pics/mobilimsellogo.png" class="ui-btn-right" align="right" id="logoimage"/></div><br><br><br><br>
+        <div class="ui-block-a">
+        <img src="pics/ihale.jpg" id="araclarbtn" class="butonlar"></img><br>
+		<img src="pics/arsiv2.jpg" id="arsivbtn" class="butonlar"></img><br><img src="pics/teklif2.jpg" id="teklifbtn" class="butonlar"></img><br>
+		<img src="pics/dosya2.jpg" id="dosyasorgula" class="butonlar"/><br><img src="pics/firsat.jpg" id="firsatbtn" class="butonlar"/><br>
+		</div>
+</div> 
+
+<div id="employeeListPage" data-role="page" data-theme="a">	
+		<div data-role="header">	
+			<a href="#nav-panel" rel="external" data-icon="bars" id="solmenuicon" data-iconpos="notext">Menu</a>
+		</div>
+		<header data-role="header" data-theme="a" data-position="fixed">
+		       <img src="pics/backbtn.jpg"  align="left" id="backimage1"/>
+			   <img src="pics/mobilimsellogo.png" align="right" id="logoimage"/>
+		</header>
+		<div data-role="content">
+			<form>
+			<div data-role="content">
+				<label for="selectmenu"></label>
+				<select name="selectmenu" id="selectmenu" data-mini="true">
+				<option value="1">Fiyata Göre Artan</option>
+				<option value="2">Fiyata Göre Azalan</option>
+				<option value="3">Akaryakıt Türüne Göre</option>
+				<option value="4">Markaya Göre</option>
+				<option value="5">Modele Göre</option>
+				<option value="6">Vites Türüne Göre</option>
+				<option value="7">En Çok Teklif Alanlar</option>
+				</select>
+			</div>
+			</form>
+			<ul id="employeeList" data-role="listview" data-filter="true" ></ul>
+		</div>
+		
+		<div data-role="panel" data-position="left" data-display="reveal" id="nav-panel" data-theme="c">
+        <form data-theme="a">
+			<div class="ui-field-contain" data-theme="a">
+			<br><br><br><br>
+				<font size="3">Belge Türü</font>
+				<select name="selectmenu1" id="selectmenu1" data-mini="true">
+				<option value="8">Hepsi</option>
+				<option value="9">Çalıntı - Buluntu</option>
+				<option value="10">Çekme Belgeli</option>
+				<option value="11">Hurda belgeli</option>
+				<option value="12">Millileştirilmiş</option>
+				<option value="13">Plakalı</option>
+				</select>
+			</div>
+			<div class="ui-field-contain">
+				<font size="3">Kullanım Tarzı</font>
+				<select name="selectmenu2" id="selectmenu2" data-mini="true">
+				<option value="14">Hepsi</option>
+				<option value="15">Kamyonet</option>
+				<option value="16">Hususi</option>
+				<option value="17">Çekici</option>
+				<option value="18">İş Makinası</option>
+				<option value="19">Otobüs</option>
+				<option value="20">Taksi</option>
+				<option value="21">Traktör</option>
+				</select>
+			</div>
+			<div class="ui-field-contain">
+				<font size="3">Marka</font>
+				<select name="selectmenu3" id="selectmenu3" data-mini="true">
+				<option value="22">Hepsi</option>
+				<option value="23">Astra</option>
+				<option value="24">Audi</option>
+				<option value="25">Opel</option>
+				<option value="26">Bmw</option>
+				<option value="27">Volkswagen</option>
+				<option value="28">Ford</option>
+				<option value="29">Tofaş</option>
+				</select>
+			</div>
+			<div class="ui-field-contain">
+				<font size="3">Akaryakıt</font>
+				<select name="selectmenu4" id="selectmenu4" data-mini="true">
+				<option value="30">Hepsi</option>
+				<option value="31">Dizel</option>
+				<option value="32">Benzin</option>
+				</select>
+			</div>
+			<div class="ui-field-contain">
+				<font size="3">Vites Türü</font>
+				<select name="selectmenu5" id="selectmenu5" data-mini="true">
+				<option value="33">Hepsi</option>
+				<option value="34">Manuel</option>
+				<option value="35">Otomatik</option>
+				</select>
+			</div>
+			</form>
+		</div><!-- /panel -->
+</div>  
+<script src="js/araclistesi.js"></script>
+<script src="js/arsivlistesi.js"></script>
+<script src="js/arsivDetay.js"></script>
+<script src="js/arsivkazandiklarim.js"></script>
+
+<div id="detailsPage" data-role="page" data-add-back-btn="true" data-theme="a">
+		<header data-role="header" data-theme="a" data-position="fixed">
+		       <img src="pics/backbtn.jpg"  align="left" id="backimage"/>
+			   <img src="pics/mobilimsellogo.png" align="right" id="logoimage"/>
+		</header>  
+		
+		<div data-role="navbar" data-theme="d">
+			<ul>
+				<li><a href="#" data-role="button">Araç Detayları</a></li>
+			</ul>
+		</div><br>
+ 	   <a class="arrow-left" href="#"></a> 
+	   <a class="arrow-right" href="#"></a>
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide"><a href="#" id="imagelink" rel="external"><img id="carPic1" class="picture"></a></div>
+				<div class="swiper-slide"><a href="#" id="imagelink1" rel="external"><img id="carPic2" class="picture"></a></div>
+				<div class="swiper-slide"><a href="#" id="imagelink2" rel="external"><img id="carPic3" class="picture"></a></div>
+			</div>
+		</div>
+		<div class="pagination"></div>
+		<div role="main" class="ui-content">
+			<ul id="actionList"  data-role="listview"></ul>
+		</div>
+		<div data-role="footer" data-position="fixed" data-theme="a" id="footerdetay">
+			<div data-role="controlgroup" id="playdiv" data-position="fixed" data-type="horizontal">
+				<a href="#employeeListPage" rel="external"><img src="pics/footer1.jpg"  alt="Low resolution logo" id="footer1"/></a>
+				<a href="#enazteklifSayfasi" rel="external"><img src="pics/footer2.jpg"  alt="Low resolution logo" id="footer2"/></a>
+				<a href="#teklifSayfasi" rel="external"><img src="pics/footer3.jpg"  alt="Low resolution logo" id="footer3"/></a>
+				<a href="#arsivSayfasi" rel="external"><img src="pics/footer4.jpg"  alt="Low resolution logo" id="footer4"/></a>
+				<a href="#" rel="external"><img src="pics/footer5.jpg"  alt="Low resolution logo" id="footer5"/></a>
+			</div>	
+		</div>
+</div>
+
+<div id="arsivSayfasi" data-role="page" data-theme="a">
+	<header data-role="header" data-theme="a" data-position="fixed">
+		       <img src="pics/backbtn.jpg"  align="left" id="backimage2"/></a>
+			   <img src="pics/mobilimsellogo.png" align="right" id="logoimage"/>
+	</header> 
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#backimage2").click(function(){
+				window.open("#arsivanasayfa","_self");
+				
+				//or you could pass parameters in the URL
+				//$.mobile.changePage("page2.html?arg1=Ram");
+			});
+		});
+    </script>
+		<div data-role="content">
+         <ul id="arsivList" data-role="listview" data-filter="true"></ul>
+    </div>	
+	<div data-role="footer" data-position="fixed" data-theme="a">
+		<div data-role="controlgroup" id="playdiv" data-type="horizontal">
+		<a href="#employeeListPage" rel="external"><img src="pics/footer1.jpg"  alt="Low resolution logo" id="footer1"/></a>
+		<a href="#enazteklifSayfasi" rel="external"><img src="pics/footer2.jpg"  alt="Low resolution logo" id="footer2"/></a>
+		<a href="#teklifSayfasi" rel="external"><img src="pics/footer3.jpg"  alt="Low resolution logo" id="footer3"/></a>
+		<a href="#arsivSayfasi" rel="external"><img src="pics/footer4.jpg"  alt="Low resolution logo" id="footer4"/></a>
+		<a href="#" rel="external"><img src="pics/footer5.jpg"  alt="Low resolution logo" id="footer5"/></a>
+		</div>	
+	</div>	
+</div>
+
+<div id="arsivSayfasikazanilan" data-role="page" data-theme="a">
+	<header data-role="header" data-theme="a" data-position="fixed">
+		       <img src="pics/backbtn.jpg"  align="left" id="backimage13"/></a>
+			   <img src="pics/mobilimsellogo.png" align="right" id="logoimage"/>
+	</header> 
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#backimage13").click(function(){
+				window.open("#arsivanasayfa","_self");
+			
+				//or you could pass parameters in the URL
+				//$.mobile.changePage("page2.html?arg1=Ram");
+			});
+		});
+    </script>
+		<div data-role="content">
+         <ul id="arsivListKazanilan" data-role="listview" data-filter="true"></ul>
+    </div>	
+	<div data-role="footer" data-position="fixed" data-theme="a">
+		<div data-role="controlgroup" id="playdiv" data-type="horizontal">
+		<a href="#employeeListPage" rel="external"><img src="pics/footer1.jpg"  alt="Low resolution logo" id="footer1"/></a>
+		<a href="#enazteklifSayfasi" rel="external"><img src="pics/footer2.jpg"  alt="Low resolution logo" id="footer2"/></a>
+		<a href="#teklifSayfasi" rel="external"><img src="pics/footer3.jpg"  alt="Low resolution logo" id="footer3"/></a>
+		<a href="#arsivSayfasi" rel="external"><img src="pics/footer4.jpg"  alt="Low resolution logo" id="footer4"/></a>
+		<a href="#" rel="external"><img src="pics/footer5.jpg"  alt="Low resolution logo" id="footer5"/></a>
+	</div>	
+	</div>	
+</div>
+
+<div id="arsivDetay" data-role="page" data-position="fixed"  data-theme="a">
+		<header data-role="header" data-theme="a" data-position="fixed">
+		       <img src="pics/backbtn.jpg"  align="left" id="backimage3"/></a>
+			   <img src="pics/mobilimsellogo.png" align="right" id="logoimage"/>
+	    </header> 
+		<script type="text/javascript">
+		$(document).ready(function(){
+			$("#backimage3").click(function(){
+				window.open("#arsivSayfasi?id="+document.getElementById("user").value,"_self");
+				
+				//or you could pass parameters in the URL
+				//$.mobile.changePage("page2.html?arg1=Ram");
+			});
+		});
+    </script>
+
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide"><a href="#" id="imagelink3" rel="external"><img id="carPicA1" class="picture"></a></div>
+				<div class="swiper-slide"><a href="#" id="imagelink4" rel="external"><img id="carPicA2" class="picture"></a></div>
+				<div class="swiper-slide"><a href="#" id="imagelink5" rel="external"><img id="carPicA3" class="picture"></a></div>
+			</div>
+		</div>
+		
+	    <div role="main" class="ui-content">
+		
+		
+	       <ul id="arsivDetayList"  data-role="listview">
+	       </ul>
+        </div><br>
+		<div data-role="footer" data-position="fixed" data-theme="a">
+		<div data-role="controlgroup" id="playdiv" data-type="horizontal">
+		<a href="#employeeListPage" rel="external"><img src="pics/footer1.jpg"  alt="Low resolution logo" id="footer1"/></a>
+		<a href="#enazteklifSayfasi" rel="external"><img src="pics/footer2.jpg"  alt="Low resolution logo" id="footer2"/></a>
+		<a href="#teklifSayfasi" rel="external"><img src="pics/footer3.jpg"  alt="Low resolution logo" id="footer3"/></a>
+		<a href="#arsivSayfasi" rel="external"><img src="pics/footer4.jpg"  alt="Low resolution logo" id="footer4"/></a>
+		<a href="#" rel="external"><img src="pics/footer5.jpg"  alt="Low resolution logo" id="footer5"/></a>
+	</div>	
+	</div>	
+</div>
+
+<div id="teklifSayfasi" data-role="page" data-theme="a">
+	<header data-role="header" data-theme="a" data-position="fixed">
+		       <img src="pics/backbtn.jpg"  align="left" id="backimage4"/></a>
+			   <img src="pics/mobilimsellogo.png" align="right" id="logoimage"/>
+	</header> 
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#backimage4").click(function(){
+				window.open("#anasayfa","_self");
+				
+				//or you could pass parameters in the URL
+				//$.mobile.changePage("page2.html?arg1=Ram");
+			});
+		});
+    </script>
+	<div data-role="content">
+         <ul id="teklifList" data-role="listview" data-filter="true"></ul>
+    </div>	
+	<div data-role="footer" data-position="fixed" data-theme="a">
+	<div data-role="controlgroup" id="playdiv" data-type="horizontal">
+		<a href="#employeeListPage" rel="external"><img src="pics/footer1.jpg"  alt="Low resolution logo" id="footer1"/></a>
+		<a href="#enazteklifSayfasi" rel="external"><img src="pics/footer2.jpg"  alt="Low resolution logo" id="footer2"/></a>
+		<a href="#teklifSayfasi" rel="external"><img src="pics/footer3.jpg"  alt="Low resolution logo" id="footer3"/></a>
+		<a href="#arsivSayfasi" rel="external"><img src="pics/footer4.jpg"  alt="Low resolution logo" id="footer4"/></a>
+		<a href="#" rel="external"><img src="pics/footer5.jpg"  alt="Low resolution logo" id="footer5"/></a>
+	</div>	
+	</div>	
+</div>
+
+<div div id="teklifDetay" data-role="page" data-theme="a">
+	<header data-role="header" data-theme="a" data-position="fixed">
+		       <img src="pics/backbtn.jpg"  align="left" id="backimage9"/></a>
+			   <img src="pics/mobilimsellogo.png" align="right" id="logoimage"/>
+	    </header> 
+		<script type="text/javascript">
+		$(document).ready(function(){
+			$("#backimage9").click(function(){
+				window.open("#teklifSayfasi?id="+document.getElementById("user").value,"_self");
+		
+				//or you could pass parameters in the URL
+				//$.mobile.changePage("page2.html?arg1=Ram");
+			});
+		});
+    </script>
+	<div role="main" class="ui-content">
+		<ul id="teklifDetayList" class="mainList" data-role="listview" data-inset="true">
+		</ul>
+	</div><br>
+	<div data-role="footer" data-position="fixed" data-theme="a">
+	<div data-role="controlgroup" id="playdiv" data-type="horizontal">
+		<a href="#employeeListPage" rel="external"><img src="pics/footer1.jpg"  alt="Low resolution logo" id="footer1"/></a>
+		<a href="#enazteklifSayfasi" rel="external"><img src="pics/footer2.jpg"  alt="Low resolution logo" id="footer2"/></a>
+		<a href="#teklifSayfasi" rel="external"><img src="pics/footer3.jpg"  alt="Low resolution logo" id="footer3"/></a>
+		<a href="#arsivSayfasi" rel="external"><img src="pics/footer4.jpg"  alt="Low resolution logo" id="footer4"/></a>
+		<a href="#" rel="external"><img src="pics/footer5.jpg"  alt="Low resolution logo" id="footer5"/></a>
+	</div>	
+	</div>
+</div>
+
+<div id="enazteklifSayfasi" data-role="page" data-theme="a">
+	<header data-role="header" data-theme="a" data-position="fixed">
+		       <img src="pics/backbtn.jpg"  align="left" id="backimage5"/></a>
+			   <img src="pics/mobilimsellogo.png" align="right" id="logoimage"/>
+	</header> 
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#backimage5").click(function(){
+				window.open("#anasayfa","_self");
+				
+				//or you could pass parameters in the URL
+				//$.mobile.changePage("page2.html?arg1=Ram");
+			});
+		});
+    </script>
+	<div data-role="content">
+         <ul id="enazteklifList" data-role="listview" data-filter="true"></ul>
+    </div>	
+	<div data-role="footer" data-position="fixed" data-theme="a">
+	<div data-role="controlgroup" id="playdiv" data-type="horizontal">
+		<a href="#employeeListPage" rel="external"><img src="pics/footer1.jpg"  alt="Low resolution logo" id="footer1"/></a>
+		<a href="#enazteklifSayfasi" rel="external"><img src="pics/footer2.jpg"  alt="Low resolution logo" id="footer2"/></a>
+		<a href="#teklifSayfasi" rel="external"><img src="pics/footer3.jpg"  alt="Low resolution logo" id="footer3"/></a>
+		<a href="#arsivSayfasi" rel="external"><img src="pics/footer4.jpg"  alt="Low resolution logo" id="footer4"/></a>
+		<a href="#" rel="external"><img src="pics/footer5.jpg"  alt="Low resolution logo" id="footer5"/></a>
+	</div>	
+	</div>
+</div>	
+
+<div id="enazteklifDetay" data-role="page" data-theme="c">
+		<header data-role="header" data-theme="a" data-position="fixed">
+		       <img src="pics/backbtn.jpg"  align="left" id="backimage10"/></a>
+			   <img src="pics/mobilimsellogo.png" align="right" id="logoimage"/>
+	    </header> 
+		<script type="text/javascript">
+		$(document).ready(function(){
+			$("#backimage10").click(function(){
+				window.open("#enazteklifSayfasi?id="+document.getElementById("user").value,"_self");
+			
+				//or you could pass parameters in the URL
+				//$.mobile.changePage("page2.html?arg1=Ram");
+			});
+		});
+    </script>
+	<center><a id="imagelink" rel="external" ><img id="employeePic1" name="slide"></img></a></center>
+	<div role="main" class="ui-content">
+   	   <form id="callAjaxForm">
+                <div data-role="fieldcontain">
+                  <b>Teklif Fiyatı</b>
+                    <input type="text" name="teklif" id="teklif" value=""/>
+					<input type="hidden" name="aracId" id="aracId" class="ui-hidden-accessible" value=""/>
+					<input type="hidden" name="user" id="user" class="ui-hidden-accessible" value=""/>
+                    <h3 id="notification"></h3>
+                    <center><button  id="submit" data-inline="true" type="submit">Gönder</button></center>
+                </div>
+        </form>
+	   <ul id="enazteklifDetayList" data-role="listview"></ul><br>
+    </div>
+	<div data-role="footer" data-position="fixed" data-theme="a">
+	<div data-role="controlgroup" id="playdiv" data-type="horizontal">
+		<a href="#employeeListPage" rel="external"><img src="pics/footer1.jpg"  alt="Low resolution logo" id="footer1"/></a>
+		<a href="#enazteklifSayfasi" rel="external"><img src="pics/footer2.jpg"  alt="Low resolution logo" id="footer2"/></a>
+		<a href="#teklifSayfasi" rel="external"><img src="pics/footer3.jpg"  alt="Low resolution logo" id="footer3"/></a>
+		<a href="#arsivSayfasi" rel="external"><img src="pics/footer4.jpg"  alt="Low resolution logo" id="footer4"/></a>
+		<a href="#" rel="external"><img src="pics/footer5.jpg"  alt="Low resolution logo" id="footer5"/></a>
+	</div>	
+	</div>
+</div>
+
+
+<div id="gelen" data-role="page" data-add-back-btn="true" data-theme="c">
+	 <header data-role="header" data-theme="a" data-position="fixed">
+		       <img src="pics/backbtn.jpg"  align="left" id="backimage6"/></a>
+			   <img src="pics/mobilimsellogo.png" align="right" id="logoimage"/>
+	</header> 
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#backimage6").click(function(){
+				window.open("#anasayfa","_self");
+			
+				//or you could pass parameters in the URL
+				//$.mobile.changePage("page2.html?arg1=Ram");
+			});
+		});
+    </script>
+     <div data-role="navbar">
+     <ul>
+	    <li><a id="gelenmesaj" href="#" rel="external" data-role="button">Gelen Mesajlar</a></li>
+        <li><a id="gidenmesaj" href="#" data-role="button" rel="external">Giden Mesajlar</a></li>
+      </ul>
+	</div>
+	<div role="main" class="ui-content">
+	   <ul id="gelenmesajList" class="mainList" data-role="listview" data-inset="true" data-divider-theme="b"></ul><br><br><br><br>
+    </div>
+	<div data-role="footer" data-position="fixed" data-theme="a">
+		<div data-role="controlgroup" id="playdiv" data-type="horizontal">
+		<a href="#employeeListPage" rel="external"><img src="pics/footer1.jpg"  alt="Low resolution logo" id="footer1"/></a>
+		<a href="#enazteklifSayfasi" rel="external"><img src="pics/footer2.jpg"  alt="Low resolution logo" id="footer2"/></a>
+		<a href="#teklifSayfasi" rel="external"><img src="pics/footer3.jpg"  alt="Low resolution logo" id="footer3"/></a>
+		<a href="#arsivSayfasi" rel="external"><img src="pics/footer4.jpg"  alt="Low resolution logo" id="footer4"/></a>
+		<a href="#" rel="external"><img src="pics/footer5.jpg"  alt="Low resolution logo" id="footer5"/></a>
+	</div>	
+	</div>
+</div>
+
+
+<div data-role="page" id="giden"  data-theme="c" class="main2">
+	<header data-role="header" data-theme="a" data-position="fixed">
+		       <img src="pics/backbtn.jpg"  align="left" id="backimage7"/></a>
+			   <img src="pics/mobilimsellogo.png" align="right" id="logoimage"/>
+	</header> 
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#backimage7").click(function(){
+				window.open("#anasayfa","_self");
+			
+				//or you could pass parameters in the URL
+				//$.mobile.changePage("page2.html?arg1=Ram");
+			});
+		});
+    </script>
+    <div data-role="navbar">
+      <ul>
+	    <li><a id="gelenmesaj1" href="#" rel="external"  data-role="button">Gelen Mesajlar</a></li>
+        <li><a id="gidenmesaj1" href="#" rel="external" data-role="button">Giden Mesajlar</a></li>
+      </ul>
+    </div>
+	<div role="main" class="ui-content">
+	   <ul id="gidenmesajList" class="mainList" data-role="listview" data-inset="true" data-divider-theme="b"></ul>
+	   <form id="mesajgonder">
+                <div data-role="fieldcontain">
+                    <b>Mail Gönderilecek Kişi</b>
+                    <input type="text" name="mesajmetni" id="mesajmetni" value=""/>
+					<input type="hidden" name="aracId1" id="aracId1" class="ui-hidden-accessible" value=""/>
+					<input type="hidden" name="user1" id="user1" class="ui-hidden-accessible" value=""/>
+                    <h3 id="notification"></h3>
+                    <center><button  id="mesajbtn" data-inline="true" type="submit">Gönder</button></center>
+                </div>
+            </form>
+    </div>	
+	<div data-role="footer" data-position="fixed" data-theme="a">
+	<div data-role="controlgroup" id="playdiv" data-type="horizontal">
+		<a href="#employeeListPage" rel="external"><img src="pics/footer1.jpg"  alt="Low resolution logo" id="footer1"/></a>
+		<a href="#enazteklifSayfasi" rel="external"><img src="pics/footer2.jpg"  alt="Low resolution logo" id="footer2"/></a>
+		<a href="#teklifSayfasi" rel="external"><img src="pics/footer3.jpg"  alt="Low resolution logo" id="footer3"/></a>
+		<a href="#arsivSayfasi" rel="external"><img src="pics/footer4.jpg"  alt="Low resolution logo" id="footer4"/></a>
+		<a href="#" rel="external"><img src="pics/footer5.jpg"  alt="Low resolution logo" id="footer5"/></a>	
+	</div>	
+	</div>
+</div>
+
+<div id="dosyaaara" data-role="page" data-theme="c" style="background: url(pics/dosyaback.jpg);background-size: 100%;" >
+	<header data-role="header" data-theme="a" data-position="fixed">
+		       <img src="pics/backbtn.jpg"  align="left" id="backimage8"/></a>
+			   <img src="pics/mobilimsellogo.png" align="right" id="logoimage"/>
+	</header> 
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#backimage8").click(function(){
+				window.open("#anasayfa","_self");
+		
+				//or you could pass parameters in the URL
+				//$.mobile.changePage("page2.html?arg1=Ram");
+			});
+		});
+    </script>
+	<fieldset data-role="controlgroup"  data-theme="a">
+     	<input type="radio" name="radio-choice" id="radio-choice-1" value="choice-1" />
+     	<label for="radio-choice-1">Takip No:</label>
+     	<input type="radio" name="radio-choice" id="radio-choice-2" value="choice-2"  />
+     	<label for="radio-choice-2">Dosya No:</label>
+     	<input type="radio" name="radio-choice" id="radio-choice-3" value="choice-3"  />
+     	<label for="radio-choice-3">Plaka No:</label>
+    </fieldset>
+   
+		<input type="text" id="dosyaId" value="" style=" background: #FFFFFF"></input>
+		<center><button id="aramabtn" data-theme="e" data-inline="true"/>Sorgula</button></center>
+		<script type="text/javascript">
+		$(document).ready(function(){
+			$("#aramabtn").click(function(){
+				window.open("#detailsPage?id="+document.getElementById("dosyaId").value,"_self");
+				document.getElementById('dosyaId').value ='';
+				//or you could pass parameters in the URL
+				//$.mobile.changePage("page2.html?arg1=Ram");
+			});
+		});
+		</script>
+		
+	 
+	<div data-role="footer" data-position="fixed" data-theme="a">
+		<div data-role="controlgroup" id="playdiv" data-type="horizontal">
+		<a href="#employeeListPage" rel="external"><img src="pics/footer1.jpg"  alt="Low resolution logo" id="footer1"/></a>
+		<a href="#enazteklifSayfasi" rel="external"><img src="pics/footer2.jpg"  alt="Low resolution logo" id="footer2"/></a>
+		<a href="#teklifSayfasi" rel="external"><img src="pics/footer3.jpg"  alt="Low resolution logo" id="footer3"/></a>
+		<a href="#arsivSayfasi" rel="external"><img src="pics/footer4.jpg"  alt="Low resolution logo" id="footer4"/></a>
+		<a href="#" rel="external"><img src="pics/footer5.jpg"  alt="Low resolution logo" id="footer5"/></a>
+	</div>	
+	</div>
+</div>
+
+<div id="detailDosyaPage" data-role="page" data-theme="c"  data-add-back-btn="true">
+	<header data-role="header" data-theme="a" data-position="fixed">
+		       <img src="pics/backbtn.jpg"  align="left" id="backimage11"/></a>
+			   <img src="pics/mobilimsellogo.png" align="right" id="logoimage"/>
+    </header> 
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#backimage11").click(function(){
+				window.open("#dosyaaara","_self");
+				
+				//or you could pass parameters in the URL
+				//$.mobile.changePage("page2.html?arg1=Ram");
+			});
+		});
+    </script>
+		<div data-role="navbar" data-theme="d">
+			<ul>
+				<li><a href="#" data-role="button">Araç Detayları</a></li>
+			</ul>
+		</div><br>
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide"><img id="carPicDosya1" class="picture"></div>
+				<div class="swiper-slide"><img id="carPicDosya2" class="picture"></div>
+				<div class="swiper-slide"><img id="carPicDosya3" class="picture"></div>
+			</div>
+		</div>
+		<div class="pagination"></div>
+		<div role="main" class="ui-content">
+			<form id="callAjaxFormDosya">
+                <div data-role="fieldcontain">
+				<input type="hidden" name="aracIdDosya" id="aracIdDosya" height="0" width="0"  data-mini="true" value=""/>
+				<input type="hidden" name="userDosya" id="userDosya" height="0" width="0" data-mini="true" data-corners="false" value=""/>
+                <label for="teklifDosya"><b>Teklif Fiyatı</b></label><input type="text" name="teklifDosya" data-mini="true" id="teklifDosya" value=""/>
+                <h3 id="notificationDosya"></h3>
+                <center><button data-theme="c" id="submitDosya" data-mini="true" data-inline="true" type="submit">Gönder</button></center>
+                </div>
+			</form>
+			<ul id="dosyadetaylist"  data-role="listview"></ul>
+		</div>
+	<div data-role="footer" data-position="fixed" data-theme="a">
+		<div data-role="controlgroup" id="playdiv" data-type="horizontal">
+			<a href="#employeeListPage" rel="external"><img src="pics/footer1.jpg"  alt="Low resolution logo" id="footer1"/></a>
+			<a href="#enazteklifSayfasi" rel="external"><img src="pics/footer2.jpg"  alt="Low resolution logo" id="footer2"/></a>
+			<a href="#teklifSayfasi" rel="external"><img src="pics/footer3.jpg"  alt="Low resolution logo" id="footer3"/></a>
+			<a href="#arsivSayfasi" rel="external"><img src="pics/footer4.jpg"  alt="Low resolution logo" id="footer4"/></a>
+			<a href="#" rel="external"><img src="pics/footer5.jpg"  alt="Low resolution logo" id="footer5"/></a>
+		</div>	
+	</div>
+</div>
+
+<div id="galleryFullScreen" data-role="page" data-theme="a">
+		<header data-role="header" data-theme="a" data-position="fixed">
+		       <img src="pics/backbtn.jpg"  align="left" id="backimage"/>
+			   <img src="pics/mobilimsellogo.png" align="right" id="logoimage"/>
+		</header>  
+		
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide"><img id="carPicFull1" class="picture"></div>
+				<div class="swiper-slide"><img id="carPicFull2" class="picture"></div>
+				<div class="swiper-slide"><img id="carPicFull3" class="picture"></div>
+			</div>
+		</div>
+		<div class="pagination"></div>
+		<div data-role="footer" data-position="fixed" data-theme="a">
+			<div data-role="controlgroup" id="playdiv" data-position="fixed" data-type="horizontal">
+				<a href="#employeeListPage" rel="external"><img src="pics/footer1.jpg"  alt="Low resolution logo" id="footer1"/></a>
+				<a href="#enazteklifSayfasi" rel="external"><img src="pics/footer2.jpg"  alt="Low resolution logo" id="footer2"/></a>
+				<a href="#teklifSayfasi" rel="external"><img src="pics/footer3.jpg"  alt="Low resolution logo" id="footer3"/></a>
+				<a href="#arsivSayfasi" rel="external"><img src="pics/footer4.jpg"  alt="Low resolution logo" id="footer4"/></a>
+				<a href="#" rel="external"><img src="pics/footer5.jpg"  alt="Low resolution logo" id="footer5"/></a>
+			</div>	
+		</div>
+</div>
+
+
+<div id="galleryPage" data-role="page"  style="background: url(pics/black1.jpg);background-size: 100%;">
+	<br><br><br><br><br>
+	<div id="galeriscreen">
+	<div class="swiper-container swiper-content" style="background: url(pics/black1.jpg);background-size: 100%;" >
+		<div class="swiper-wrapper" >
+			<div class="swiper-slide">
+			
+					<center><img class="picture" id="1" height="150" width="150" alt=""></center>
+					
+				
+			</div>
+			<div class="swiper-slide">
+			
+					<img class="picture"  id="2" height="150" width="150" alt="">
+					
+			
+			</div>
+			<div class="swiper-slide">
+				
+					<img class="picture"  id="3" height="150" width="150" alt="">
+					
+				
+			</div>
+			<div class="swiper-slide">
+				
+					<img class="picture"  id="4" height="150" width="150" alt="">
+					
+				
+			</div>
+			<div class="swiper-slide">
+				
+					<img class="picture"  id="5" height="150" width="150" alt="">
+					
+				
+			</div>
+			<div class="swiper-slide">
+				
+					<img class="picture"  id="6" height="150" width="150" alt="">
+					
+				
+			</div>
+			<div class="swiper-slide">
+				
+					<img class="picture"  id="7" height="150" width="150" alt="">
+					
+				
+			</div>
+			<div class="swiper-slide">
+				
+					<img class="picture"  id="8" height="150" width="150" alt="">
+					
+			</div>
+			<div class="swiper-slide">
+				
+					<img class="picture"  id="9" height="150" width="150" alt="">
+				
+				
+			</div>
+			<div class="swiper-slide">
+				
+					<img class="picture"  id="10" height="150" width="150" alt="">
+					
+				
+			</div>
+			<div class="swiper-slide">
+				
+					<img class="picture"  id="11" height="150" width="150" alt="">
+					
+				
+			</div>			
+		</div>
+	</div>
+	</div>
+</div>
+  <script src="js/idangerous.swiper-2.1.min.js"></script>
+  <script>
+  var mySwiper = new Swiper('.swiper-container',{
+    pagination: '.pagination',
+    loop:true,
+    grabCursor: true,
+    paginationClickable: true
+  })
+  $('.arrow-left').on('click', function(e){
+    e.preventDefault()
+    mySwiper.swipePrev()
+  })
+  $('.arrow-right').on('click', function(e){
+    e.preventDefault()
+    mySwiper.swipeNext()
+  })
+  </script>
+	
+</body>
+
+</html>

@@ -1,0 +1,372 @@
+﻿<html>
+<head>
+<meta name="robots" content="all" />
+<meta name="robots" content="index,follow" />
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1254" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9" />
+<meta http-equiv="Content-Type" content="text/html; charset=x-mac-turkish" />
+<title>Mobilimsel Esovtaj</title>
+<link rel="stylesheet" href="css/jquery.mobile-1.4.0.min.css">
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.mobile-1.4.0.min.js"></script>
+<link rel="stylesheet" href="css/idangerous.swiper.css">
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.mobile-1.4.0.min.js"></script>
+<style>
+.picture{
+  height: 400px;
+  width: 600px;
+}
+.movie-pic{
+  height: auto;
+  width: 100%;
+}
+.swiper-container {
+  height: 400px;
+  width: 600px;
+  position: center;
+ margin-left: auto;
+    margin-right: auto;
+}
+
+.content-slide {
+  padding: 200px;
+  color: #fff;
+}
+.pagination {
+  position: absolute;
+  left: 0;
+  text-align: center;
+  bottom:5px;
+  width: 100%;
+}
+.swiper-pagination-switch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+  background: #999;
+  box-shadow: 0px 1px 2px #555 inset;
+  margin: 0 3px;
+  cursor: pointer;
+}
+.swiper-active-switch {
+  background: #fff;
+}
+</style>
+<script>
+$( document ).ready(function() {
+
+$('#girissayfa').click(function(){
+if(( document.getElementById('txtUser').value=="muzeyyen" && document.getElementById('txtPass').value=="123") || ( document.getElementById('txtUser').value=="mobilimsel" && document.getElementById('txtPass').value=="123"))
+   {
+			 window.open("#anasayfa","_self");
+   }
+   else
+	{
+		alert("Kullanıcı Adı ya da Parola Yanlış")/*displays error message*/
+	}
+});
+});
+</script>
+<script>
+        function onSuccess2(data, status)
+        {
+            data = $.trim(data);
+            $("#notification2").text(data);
+			window.open("#uyegiris","_self");
+        }
+  
+        function onError(data, status)
+        {
+            // handle an error
+        }        
+  
+        $(document).ready(function() {
+            $("#uyeolbtn").click(function(){
+                var formData = $("#kisiselbilgiler").serialize();
+  
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8080/mobilimselesovtaj/services/bilgilerikaydet.php",
+                    cache: false,
+                    data: formData,
+                    success: onSuccess2,
+                    error: onError
+                });
+                return false;
+            });
+        });
+			$("#notification2").text="";
+</script>
+
+<script>
+$(document).delegate('#kayitlarPage', 'pageshow', function() {
+	getilacEkle();
+	
+});
+
+function getilacEkle() {
+	$.getJSON('http://localhost/mobilimselesovtaj/services/getaraclar.php', function(data) {
+		$('#kayitlarList li').remove();
+		kayitliste = data.items;
+		$.each(kayitliste, function(index, arac) {
+			$('#kayitlarList').append('<li data-icon="false"><a rel="external" href="#detailsPage?id=' + arac.idaraclar + '">' +
+					'<img widht="120" height="90" src="pics/' +  arac.image + '"/><img class="staricon" widht="40" height="40" align="right" src="pics/star.jpg"/>' +
+					'<h4>' + arac.marka + ' ' + arac.yer + '</h4>' +
+					'<p>' + arac.Belge_Turu + '</p>' +
+					'</a></li>');
+		});
+		$('#kayitlarList').listview('refresh');		
+	});	
+}
+</script>
+
+<script>
+$(document).delegate('#detailsPage', 'pageshow', function() {
+	var id = getUrlVars()["id"];
+	$.getJSON('http://localhost/mobilimselesovtaj/services/getarac.php?id='+id, displayEmployee);
+    });
+	var image1=new Image();
+	var image2=new Image();
+	var image3=new Image();
+	var step=1;
+	function displayEmployee(data) {
+
+	$('#actionList li').remove();
+	$('#employeePic src').remove();
+
+	var employee = data.item;
+	console.log(employee);
+	$('#employeePic').attr('src','pics/' + employee.image);
+	image1.src='http://localhost/mobilimselesovtaj/www/pics/'+employee.idaraclar+'/' + employee.image1;
+	image2.src='http://localhost/mobilimselesovtaj/www/pics/'+employee.idaraclar+'/' + employee.image2;
+	image3.src='http://localhost/mobilimselesovtaj/www/pics/'+employee.idaraclar+'/' + employee.image3;
+	var step=1;
+	function slideit()
+	{
+    //if browser does not support the image object, exit.
+		if (!document.images)
+		return
+		document.images.slide.src=eval("image"+step+".src")
+		if (step<3)
+			step++
+		else
+			step=1
+			//call function "slideit()" every 2.5 seconds
+			setTimeout("slideit()",2500)
+	}
+	window.onload = slideit();
+	$('#imagelink').attr('href','#galleryPage?id='+employee.idaraclar);
+	$('#imagelink1').attr('href','#galleryPage?id='+employee.idaraclar);
+	$('#imagelink2').attr('href','#galleryPage?id='+employee.idaraclar);
+	$('#employeePic').attr('src','pics/'+employee.idaraclar+'/' + employee.image1);
+	$('#carPic1').attr('src', 'http://localhost/esovtajlocal9/www/pics/'+employee.idaraclar+'/' + employee.image1);
+	$('#carPic2').attr('src', 'http://localhost/esovtajlocal9/www/pics/'+employee.idaraclar+'/' + employee.image2);
+	$('#carPic3').attr('src', 'http://localhost/esovtajlocal9/www/pics/'+employee.idaraclar+'/' + employee.image3);	
+		
+    $('#aracId').attr('value', ''+employee.idaraclar+'');
+	$('#aracId1').attr('value',''+employee.idaraclar+'');
+		
+	$('#actionList').append('<li><p>' + employee.marka + '<img src="pics/mesajbtn.jpg" align="right" id="mesajbtn"/></a>' +
+				'<p style="color:orange;">' + employee.Belge_Turu + '</p></li>');
+			
+	$('#actionList').append('<li><form id="callAjaxForm">'+		
+	 '<div data-role="fieldcontain">' +
+     '<input type="hidden" name="aracId" id="aracId" height="0" width="0"  data-mini="true" value=""/>' +
+	 '<input type="hidden" name="user" id="user" height="0" width="0" data-mini="true" data-corners="false" value=""/>' +
+     '<label for="teklif"><b>Teklif Fiyatı </b></label><input type="text" name="teklif" data-mini="true" id="teklif" value=""/>' +
+     '<h3 id="notification"></h3>' +
+     '<center><button data-theme="c" onclick="gonder();" data-mini="true" data-inline="true" type="submit">Gönder</button></center>' +
+     '</div>' +
+	 '</form></li>');
+	 
+	 
+	$('#actionList').append('<li><hr><b>Araç Bilgileri</b><hr>'+
+	'<b>Bulunduğu Yer&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Plaka No</b>' +
+	'<p>' + employee.yer + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+employee.Plaka_No+'</p>'+
+	'<b>Dosya No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Takip No</b>' +
+	'<p>' + employee.dosyaNo+ '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+employee.takipNo+'</p>'+
+	'<hr><b>İhale Bilgileri</b><hr>'+
+	'<b>İhale No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;İhale Bitiş Zamanı</b>' +
+	'<p>' + employee.ihaleNo + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+employee.ihaleBitisi+'</p>'+
+	'<b>İhale Sorumlusu&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Piyasa Bedeli</b>' +
+	'<p>' + employee.ihaleSorumlusu + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+employee.piyasaBedeli+'</p>'+
+	'<hr><b>Hasar Bilgileri</b><hr>'+
+	'<p>'+ employee.sasiNo +' Sasino lu arac '+ employee.kazaSayisi +' adet kazaya karışmıştır.</p></li>');
+	if (employee.kaza1) 
+	{
+		$('#actionList').append('<li><p>' + employee.kaza1 + '</p></li>');
+	}
+	if (employee.kaza2) 
+	{
+		$('#actionList').append('<li><p>' + employee.kaza2 + '</p></li>');
+	}
+	if (employee.kaza3) 
+	{
+		$('#actionList').append('<li><p>' + employee.kaza3 + '</p></li>');
+	}
+
+	$('#actionList').append('<li>' +
+					'<h4>İhale Sorumlusu</h4><hr>' +
+					'<p>' + employee.kisiAdi + '</p>' +
+					'<p>' + employee.telefon + '</p>' +
+					'<p>' + employee.adres + '</p>' +
+					'</a></li>');	
+					
+	$('#actionList').append('<li><div data-role="content"><p style="color:red;"> GEÇMİŞ DÖNEME AİT TRAMER SORGUSUDUR. SON HASARA AİT TRAMER KAYITLARI DEĞİŞİKLİK GÖSTEREBİLECEĞİNDEN LÜTFEN TRAMER SORGUSU YAPARAK TEKLİF VERİNİZ.</p></li></div>');
+
+	$('#actionList').listview('refresh');
+	
+
+	}
+	function slideit(){
+	//if browser does not support the image object, exit.
+	if (!document.images)
+	return
+	document.images.slide.src=eval("image"+step+".src")
+	if (step<3)
+		step++
+	else
+		step=1
+		//call function "slideit()" every 2.5 seconds
+		setTimeout("slideit()",2500)
+	}
+	function getUrlVars() {
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+	}
+</script>
+ 
+<script src="js/idangerous.swiper-2.0.min.js"></script>
+<script src="js/movies-app.js"></script>
+
+</head>
+<body>
+<div align="center" data-role="page" id="giris" data-theme="e">
+    <div  data-role="content">
+	    <br><br><br><br><br><br>
+		<center><img src="pics/mobilimsellogo.png"></center>
+		<a href="#uyegiris" data-role="button" id="uyebuton"  style="color:black; background-color:#DF0101"/><font size="6">Uye Girisi</font></a> <br>
+		<a href="#uyeol" data-role="button"  id="uyeolbuton" style="color:black; background-color:#DF0101"/><font size="6">Uye Ol</font></a>
+	</div>
+</div><!-- /page -->
+
+<div align="center" data-role="page" id="uyegiris" data-theme="e">
+	    <br><br><br><br>
+		<center><img src="pics/mobilimsellogo.png"></center><br>
+		<b>Kullanıcı Adı:</b>
+        <input id="txtUser" type="text" data-theme="a" data-mini="true"></input>
+        <b>Parola:</b>
+        <input id="txtPass" type="password" data-theme="a" data-mini="true" /></center>
+        <button id="girissayfa" data-inline="true" style="background-color:red">Giriş</button></center> 
+</div><!-- /page -->  
+
+<div align="center" data-role="page" id="uyeol" data-theme="c">
+	    <br>
+		<form id="kisiselbilgiler">
+		  <div data-role="fieldcontain">
+			<font size="6"  style="text-shadow: none;"><b>Adı:</b></font>
+			<input id="txtAd" name="txtAd" type="text" style="color:black; background-color:#FFFFFF"></input>
+			<font size="6"  style="text-shadow: none;"><b>Soyadı:</b></font>
+			<input id="txtSoyad" name="txtSoyad" type="text" style="color:black;background-color:#FFFFFF" />
+			<font size="6"  style="text-shadow: none;"><b>Kullanıcı Adı:</b></font>
+			<input id="txtKullaniciAd" name="txtKullaniciAd" type="text" style="color:black; background-color:#FFFFFF"></input>
+			<font size="6"  style="text-shadow: none;"><b>Parola:</b></font>
+			<input id="txtKullaniciParola" name="txtKullaniciParola" type="text" style="color:black;background-color:#FFFFFF" />
+			<font size="6"  style="text-shadow: none;"><b>Doğum Tarihi:</b></font>
+			<input id="dogumtarihi" name="dogumtarihi" type="text" style="color:black; background-color:#FFFFFF"></input>
+			<font size="6"  style="text-shadow: none;"><b>Doğum Yeri:</b></font>
+			<input id="dogumyeri" name="dogumyeri" type="text" style="color:black; background-color:#FFFFFF"></input>
+			<font size="6"  style="text-shadow: none;"><b>T.C. Kimlik No:</b></font>
+			<input id="txtTcKimlikNo" name="txtTcKimlikNo" type="text" style="color:black; background-color:#FFFFFF"></input>
+			<font size="6"  style="text-shadow: none;"><b>Telefon Numarası:</b></font>
+			<input id="txtTcKimlikNo" name="txttelefonNo" type="text" style="color:black; background-color:#FFFFFF"></input>
+			<h3 id="notification2"></h3>
+			<button style="text-shadow: none;color:black; background-color:red" id="uyeolbtn" type="submit"><font size="6" >Üye Ol</font></button> 		
+		  </div>
+		</form>
+</div><!-- /page --> 
+
+<div id="anasayfa" data-role="page" data-theme="c">
+		<center><header data-role="header" data-theme="c" style="background: url(img/beyaz.jpg);" data-position="fixed"><img src="pics/mobilimsellogo.png" id="logoimage"/><br></header></center>
+        <br><br><br>
+		<div data-role="content">
+		    <a href="#yenikayitpage" data-role="button" id="uyebuton"  style="color:black; background-color:red"/><font size="6">Yeni Kayıt</font></a> <br>
+		    <a href="#kayitlarPage" data-role="button"  id="uyeolbuton" style="color:black; background-color:red"/><font size="6">Varolan Kayıtlar</font></a>
+		</div></center>
+</div> 
+
+<div align="center" data-role="page" id="yenikayitpage" data-theme="c">
+	    <br>
+		<form id="aracbilgileri">
+		  <div data-role="fieldcontain">
+		    <label for="markasec" class="select"><font size="3"><b>Marka Seçiniz...</b></font></label><br>
+			<select name="markasec" id="markasec">
+			</select>
+			<label for="kullanimtarzi" class="select"><font size="3"><b>Kullanım Tarzı Seçiniz...</b></font></label><br>
+			<select name="kullanimtarzi" id="kullanimtarzi">
+			</select>
+			<label for="akaryakitturu" class="select"><font size="3"><b>Akaryakıt Türü Seçiniz...</b></font></label><br>
+			<select name="akaryakitturu" id="akaryakitturu">
+			</select>
+			<label for="vitesturu" class="select"><font size="3"><b>Vites Türü Seçiniz...</b></font></label><br>
+			<select name="vitesturu" id="vitesturu">
+			</select>
+			<label for="belgeturu" class="select"><font size="3"><b>Belge Türü Seçiniz...</b></font></label><br>
+			<select name="belgeturu" id="belgeturu">
+			</select>
+			<font size="3"  style="text-shadow: none;"><b>Model Yılı</b></font>
+			<input id="modelyili" name="modelyili" type="text" style="color:black; background-color:#FFFFFF"></input>
+			<font size="3"  style="text-shadow: none;"><b>Plaka No:</b></font>
+			<input id="plakano" name="plakano" type="text" style="color:black;background-color:#FFFFFF" />
+			<font size="3"  style="text-shadow: none;"><b>Kaza 1:</b></font>
+			<input id="kaza1" name="kaza1" type="text" style="color:black; background-color:#FFFFFF"></input>
+			<font size="3"  style="text-shadow: none;"><b>Kaza 2:</b></font>
+			<input id="kaza2" name="kaza2" type="text" style="color:black; background-color:#FFFFFF"></input>
+			<font size="3"  style="text-shadow: none;"><b>Kaza 3:</b></font>
+			<input id="kaza3" name="kaza3" type="text" style="color:black; background-color:#FFFFFF"></input>
+			<h3 id="notification2"></h3>
+			<button style="text-shadow: none;color:black; background-color:red" id="uyeolbtn" type="submit"><font size="6" >Üye Ol</font></button> 		
+		  </div>
+		</form>
+</div><!-- /page --> 
+
+
+<div id="kayitlarPage" data-role="page" data-theme="a">	
+		<center><header data-role="header" data-theme="c" style="background: url(pics/beyaz.jpg);" data-position="fixed"><br><img src="pics/mobilimsellogo.png" id="logoimage"/><br><br></header></center>
+		<div data-role="content">
+			<ul id="kayitlarList" data-role="listview" data-filter="true" ></ul>
+		</div>
+</div>
+
+<div id="detailsPage" data-role="page" data-add-back-btn="true" data-theme="a">
+        <center><header data-role="header" data-theme="c" style="background: url(pics/beyaz.jpg);" data-position="fixed"><br><img src="pics/mobilimsellogo.png" id="logoimage"/><br><br></header></center>
+		<div data-role="navbar" data-theme="d">
+			<ul>
+				<li><a href="#" data-role="button">Araç Detayları</a></li>
+			</ul>
+		</div><br>
+ 	   <a class="arrow-left" href="#"></a> 
+	   <a class="arrow-right" href="#"></a>
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide"><a href="#" id="imagelink" rel="external"><img id="carPic1" class="picture"></a></div>
+				<div class="swiper-slide"><a href="#" id="imagelink1" rel="external"><img id="carPic2" class="picture"></a></div>
+				<div class="swiper-slide"><a href="#" id="imagelink2" rel="external"><img id="carPic3" class="picture"></a></div>
+			</div>
+		</div>
+		<div class="pagination"></div>
+		<div role="main" class="ui-content">
+			<ul id="actionList"  data-role="listview"></ul>
+		</div>
+</div>
+</body>
+</html>

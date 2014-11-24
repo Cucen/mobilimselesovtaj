@@ -1,0 +1,174 @@
+<html>
+<head>
+<meta name="robots" content="all" />
+<meta name="robots" content="index,follow" />
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1254" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9" />
+<meta http-equiv="Content-Type" content="text/html; charset=x-mac-turkish" />
+<title>Mobilimsel Esovtaj</title>
+<link rel="stylesheet" href="css/jquery.mobile-1.4.0.min.css">
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.mobile-1.4.0.min.js"></script>
+<script>
+$( document ).ready(function() {
+
+$('#girissayfa').click(function(){
+if(( document.getElementById('txtUser').value=="muzeyyen" && document.getElementById('txtPass').value=="123") || ( document.getElementById('txtUser').value=="mobilimsel" && document.getElementById('txtPass').value=="123"))
+   {
+			 window.open("#anasayfa","_self");
+   }
+   else
+	{
+		alert("Kullanıcı Adı ya da Parola Yanlış")/*displays error message*/
+	}
+});
+});
+</script>
+<script>
+        function onSuccess2(data, status)
+        {
+            data = $.trim(data);
+            $("#notification2").text(data);
+			window.open("#uyegiris","_self");
+        }
+  
+        function onError(data, status)
+        {
+            // handle an error
+        }        
+  
+        $(document).ready(function() {
+            $("#uyeolbtn").click(function(){
+                var formData = $("#kisiselbilgiler").serialize();
+  
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8080/mobilimselesovtaj/services/bilgilerikaydet.php",
+                    cache: false,
+                    data: formData,
+                    success: onSuccess2,
+                    error: onError
+                });
+                return false;
+            });
+        });
+			$("#notification2").text="";
+</script>
+<script>
+$(document).delegate('#uyeol1', 'pageshow', function() {
+	geteczaneler();
+	
+});
+
+function geteczaneler() {
+	$.getJSON('http://176.43.246.81:82/ben/services/geteczanaler.php', function(data) {
+		$('#eczaneList li').remove();
+		eczaneliste = data.items;
+		$.each(eczaneliste, function(index, eczane) {
+			var select, option;
+			select = document.getElementById( 'eczanesec' );
+			option = document.createElement( 'option' );
+			option.value = eczane.eczane_id;
+			option.text = eczane.eczane_adi;
+			select.add( option );
+  });
+		$('#eczaneList').listview('refresh');
+	});
+	
+}
+
+</script>
+
+</head>
+<body>
+<div align="center" data-role="page" id="giris" data-theme="e">
+    <div  data-role="content">
+	    <br><br><br><br><br><br>
+		<center><img src="pics/mobilimsellogo.png"></center>
+		<a href="#uyegiris" data-role="button" id="uyebuton"  style="color:black; background-color:#DF0101"/><font size="6">Uye Girisi</font></a> <br>
+		<a href="#uyeol" data-role="button"  id="uyeolbuton" style="color:black; background-color:#DF0101"/><font size="6">Uye Ol</font></a>
+	</div>
+</div><!-- /page -->
+
+<div align="center" data-role="page" id="uyegiris" data-theme="e">
+	    <br><br><br><br>
+		<center><img src="pics/mobilimsellogo.png"></center><br>
+		<b>Kullanıcı Adı:</b>
+        <input id="txtUser" type="text" data-theme="a" data-mini="true"></input>
+        <b>Parola:</b>
+        <input id="txtPass" type="password" data-theme="a" data-mini="true" /></center>
+        <button id="girissayfa" data-inline="true" style="background-color:red">Giriş</button></center> 
+</div><!-- /page -->  
+
+<div align="center" data-role="page" id="uyeol" data-theme="c">
+	    <br>
+		<form id="kisiselbilgiler">
+		  <div data-role="fieldcontain">
+			<font size="6"  style="text-shadow: none;"><b>Adı:</b></font>
+			<input id="txtAd" name="txtAd" type="text" style="color:black; background-color:#FFFFFF"></input>
+			<font size="6"  style="text-shadow: none;"><b>Soyadı:</b></font>
+			<input id="txtSoyad" name="txtSoyad" type="text" style="color:black;background-color:#FFFFFF" />
+			<font size="6"  style="text-shadow: none;"><b>Kullanıcı Adı:</b></font>
+			<input id="txtKullaniciAd" name="txtKullaniciAd" type="text" style="color:black; background-color:#FFFFFF"></input>
+			<font size="6"  style="text-shadow: none;"><b>Parola:</b></font>
+			<input id="txtKullaniciParola" name="txtKullaniciParola" type="text" style="color:black;background-color:#FFFFFF" />
+			<font size="6"  style="text-shadow: none;"><b>Doğum Tarihi:</b></font>
+			<input id="dogumtarihi" name="dogumtarihi" type="text" style="color:black; background-color:#FFFFFF"></input>
+			<font size="6"  style="text-shadow: none;"><b>Doğum Yeri:</b></font>
+			<input id="dogumyeri" name="dogumyeri" type="text" style="color:black; background-color:#FFFFFF"></input>
+			<font size="6"  style="text-shadow: none;"><b>T.C. Kimlik No:</b></font>
+			<input id="txtTcKimlikNo" name="txtTcKimlikNo" type="text" style="color:black; background-color:#FFFFFF"></input>
+			<font size="6"  style="text-shadow: none;"><b>Telefon Numarası:</b></font>
+			<input id="txtTcKimlikNo" name="txttelefonNo" type="text" style="color:black; background-color:#FFFFFF"></input>
+			<h3 id="notification2"></h3>
+			<button style="text-shadow: none;color:black; background-color:red" id="uyeolbtn" type="submit"><font size="6" >Üye Ol</font></button> 		
+		  </div>
+		</form>
+</div><!-- /page --> 
+
+<div id="anasayfa" data-role="page" data-theme="c">
+		<center><header data-role="header" data-theme="c" style="background: url(img/beyaz.jpg);" data-position="fixed"><img src="pics/mobilimsellogo.png" id="logoimage"/><br></header></center>
+        <br><br><br>
+		<div data-role="content">
+		    <a href="#yenikayitpage" data-role="button" id="uyebuton"  style="color:black; background-color:red"/><font size="6">Yeni Kayıt</font></a> <br>
+		    <a href="#kayitlar" data-role="button"  id="uyeolbuton" style="color:black; background-color:red"/><font size="6">Varolan Kayıtlar</font></a>
+		</div></center>
+</div> 
+
+<div align="center" data-role="page" id="yenikayitpage" data-theme="c">
+	    <br>
+		<form id="aracbilgileri">
+		  <div data-role="fieldcontain">
+		    <label for="markasec" class="select"><font size="3"><b>Marka Seçiniz...</b></font></label><br>
+			<select name="markasec" id="markasec">
+			</select>
+			<label for="kullanimtarzi" class="select"><font size="3"><b>Kullanım Tarzı Seçiniz...</b></font></label><br>
+			<select name="kullanimtarzi" id="kullanimtarzi">
+			</select>
+			<label for="akaryakitturu" class="select"><font size="3"><b>Akaryakıt Türü Seçiniz...</b></font></label><br>
+			<select name="akaryakitturu" id="akaryakitturu">
+			</select>
+			<label for="vitesturu" class="select"><font size="3"><b>Vites Türü Seçiniz...</b></font></label><br>
+			<select name="vitesturu" id="vitesturu">
+			</select>
+			<label for="belgeturu" class="select"><font size="3"><b>Belge Türü Seçiniz...</b></font></label><br>
+			<select name="belgeturu" id="belgeturu">
+			</select>
+			<font size="3"  style="text-shadow: none;"><b>Model Yılı</b></font>
+			<input id="modelyili" name="modelyili" type="text" style="color:black; background-color:#FFFFFF"></input>
+			<font size="3"  style="text-shadow: none;"><b>Plaka No:</b></font>
+			<input id="plakano" name="plakano" type="text" style="color:black;background-color:#FFFFFF" />
+			<font size="3"  style="text-shadow: none;"><b>Kaza 1:</b></font>
+			<input id="kaza1" name="kaza1" type="text" style="color:black; background-color:#FFFFFF"></input>
+			<font size="3"  style="text-shadow: none;"><b>Kaza 2:</b></font>
+			<input id="kaza2" name="kaza2" type="text" style="color:black; background-color:#FFFFFF"></input>
+			<font size="3"  style="text-shadow: none;"><b>Kaza 3:</b></font>
+			<input id="kaza3" name="kaza3" type="text" style="color:black; background-color:#FFFFFF"></input>
+			<h3 id="notification2"></h3>
+			<button style="text-shadow: none;color:black; background-color:red" id="uyeolbtn" type="submit"><font size="6" >Üye Ol</font></button> 		
+		  </div>
+		</form>
+</div><!-- /page --> 
+
+</body>
+</html>
